@@ -574,7 +574,7 @@ function ProgressBar({
               style={{ minWidth: 56 }}
             >
               <div
-                className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300"
+                className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300"
                 style={{
                   background: done
                     ? "oklch(0.55 0.15 140)"
@@ -588,7 +588,7 @@ function ProgressBar({
                   boxShadow: active
                     ? "0 0 0 3px oklch(0.58 0.14 10 / 0.15)"
                     : "none",
-                  transform: active ? "scale(1.12)" : "scale(1)",
+                  transform: active ? "scale(0.85)" : "scale(1)",
                   cursor: i < currentIndex ? "pointer" : "default",
                 }}
               >
