@@ -66,7 +66,7 @@ export default function OrderOnline() {
       />
 
       <div className="container">
-        {/* Compact header row — original layout */}
+        {/* Compact header row - original layout */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-2 mb-5">
           <div className="mb-5">
             <p
