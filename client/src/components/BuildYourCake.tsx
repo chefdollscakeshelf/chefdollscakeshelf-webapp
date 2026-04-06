@@ -272,7 +272,7 @@ export default function BuildYourCake() {
     goToStep(1, "forward");
   };
 
-  // Validation — can user proceed from current step?
+  // Validation - can user proceed from current step?
   const canProceed = (): boolean => {
     const id = currentStep.id;
     if (id === "product") return order.product !== null;
@@ -397,7 +397,7 @@ export default function BuildYourCake() {
                 transition: "opacity 0.22s ease, transform 0.22s ease",
               }}
             >
-              {/* Step 0 — Product selection */}
+              {/* Step 0 - Product selection */}
               {currentStep.id === "product" && (
                 <StepProduct
                   onSelect={selectProduct}
@@ -829,7 +829,7 @@ function StepFlavor({
         className="text-sm mb-6"
         style={{ color: "oklch(0.55 0.04 30)", fontFamily: "var(--font-body)" }}
       >
-        Every bite matters — choose your favourite.
+        Every bite matters - choose your favourite.
       </p>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {flavors.map(f => {
@@ -1103,7 +1103,7 @@ function StepSummary({
         />
         <SummaryRow
           label={isBrownie ? "Quantity" : "Size"}
-          value={`${order.size?.emoji} ${order.size?.label} — ${order.size?.serves}`}
+          value={`${order.size?.emoji} ${order.size?.label} - ${order.size?.serves}`}
         />
         {!isBrownie && order.flavor && (
           <SummaryRow
