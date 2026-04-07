@@ -3,6 +3,7 @@ export type ProductType = "cake" | "cupcake" | "brownie";
 export type StepId =
   | "product"
   | "size"
+  | "date"
   | "flavor"
   | "frosting"
   | "decorations"
@@ -35,6 +36,7 @@ export interface FrostingOption {
 export interface OrderState {
   product: ProductType | null;
   size: SizeOption | null;
+  deliveryDate: string; // ISO date string "YYYY-MM-DD"
   flavor: FlavorOption | null;
   frosting: FrostingOption | null;
   decorations: string[];

@@ -65,6 +65,12 @@ export default function StepSummary({
           label={isBrownie ? "Quantity" : "Size"}
           value={`${order.size?.emoji} ${order.size?.label} - ${order.size?.serves}`}
         />
+        {order.deliveryDate && (
+          <SummaryRow
+            label="Delivery Date"
+            value={new Date(order.deliveryDate + "T00:00:00").toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
+          />
+        )}
         {!isBrownie && order.flavor && (
           <SummaryRow label="Flavor" value={`${order.flavor.emoji} ${order.flavor.label}`} />
         )}

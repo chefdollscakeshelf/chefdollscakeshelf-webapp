@@ -127,6 +127,7 @@ export function getSteps(product: ProductType | null): StepConfig[] {
     return [
       { id: "product", label: "Product", emoji: "🛍️" },
       { id: "size", label: "Quantity", emoji: "📦" },
+      { id: "date", label: "Delivery Date", emoji: "📆" },
       { id: "decorations", label: "Add-ons", emoji: "✨" },
       { id: "summary", label: "Summary", emoji: "🎉" },
     ];
@@ -138,6 +139,7 @@ export function getSteps(product: ProductType | null): StepConfig[] {
       label: product === "cupcake" ? "Serving" : "Size",
       emoji: "📏",
     },
+    { id: "date", label: "Delivery Date", emoji: "📆" },
     { id: "flavor", label: "Flavor", emoji: "🍰" },
     { id: "frosting", label: "Frosting", emoji: "🎂" },
     {

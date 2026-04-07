@@ -26,6 +26,7 @@ import StepSize from "./StepSize";
 import StepFlavor from "./StepFlavor";
 import StepFrosting from "./StepFrosting";
 import StepDecorations from "./StepDecorations";
+import StepDeliveryDate from "./StepDeliveryDate";
 import StepSummary from "./StepSummary";
 import OrderSidebar from "./OrderSidebar";
 import MenuOrder from "./MenuOrder";
@@ -60,6 +61,7 @@ export default function BuildYourCake() {
   const [order, setOrder] = useState<OrderState>({
     product: null,
     size: null,
+    deliveryDate: "",
     flavor: null,
     frosting: null,
     decorations: [],
@@ -108,6 +110,7 @@ export default function BuildYourCake() {
     setOrder({
       product: type,
       size: null,
+      deliveryDate: "",
       flavor: null,
       frosting: null,
       decorations: [],
@@ -121,6 +124,7 @@ export default function BuildYourCake() {
     const id = currentStep.id;
     if (id === "product") return order.product !== null;
     if (id === "size") return order.size !== null;
+    if (id === "date") return order.deliveryDate !== "";
     if (id === "flavor") return order.flavor !== null;
     if (id === "frosting") return order.frosting !== null;
     return true;
@@ -138,12 +142,15 @@ export default function BuildYourCake() {
   const buildWhatsAppMsg = () => {
     const p = order.product;
     let msg = `Hi Dhvani! I'd like to order from ChefDollsCakeShelf.%0A%0A`;
+    const dateStr = order.deliveryDate
+      ? new Date(order.deliveryDate + "T00:00:00").toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })
+      : "Not specified";
     if (p === "cake") {
-      msg += `🎂 *Custom Cake Order:*%0A• Size: ${order.size?.label} (${order.size?.serves})%0A• Flavor: ${order.flavor?.label}%0A• Frosting: ${order.frosting?.label}%0A• Decorations: ${order.decorations.length > 0 ? order.decorations.join(", ") : "None"}%0A• Estimated Budget: ₹${totalPrice()}+`;
+      msg += `🎂 *Custom Cake Order:*%0A• Size: ${order.size?.label} (${order.size?.serves})%0A• Delivery Date: ${dateStr}%0A• Flavor: ${order.flavor?.label}%0A• Frosting: ${order.frosting?.label}%0A• Decorations: ${order.decorations.length > 0 ? order.decorations.join(", ") : "None"}%0A• Estimated Budget: ₹${totalPrice()}+`;
     } else if (p === "cupcake") {
-      msg += `🧁 *Cupcake Order:*%0A• Quantity: ${order.size?.label}%0A• Flavor: ${order.flavor?.label}%0A• Frosting: ${order.frosting?.label}%0A• Toppings: ${order.decorations.length > 0 ? order.decorations.join(", ") : "None"}%0A• Estimated Budget: ₹${totalPrice()}+`;
+      msg += `🧁 *Cupcake Order:*%0A• Quantity: ${order.size?.label}%0A• Delivery Date: ${dateStr}%0A• Flavor: ${order.flavor?.label}%0A• Frosting: ${order.frosting?.label}%0A• Toppings: ${order.decorations.length > 0 ? order.decorations.join(", ") : "None"}%0A• Estimated Budget: ₹${totalPrice()}+`;
     } else {
-      msg += `🍫 *Brownie Order:*%0A• Quantity: ${order.size?.label}%0A• Add-ons: ${order.addons.length > 0 ? order.addons.join(", ") : "None"}%0A• Estimated Budget: ₹${totalPrice()}+`;
+      msg += `🍫 *Brownie Order:*%0A• Quantity: ${order.size?.label}%0A• Delivery Date: ${dateStr}%0A• Add-ons: ${order.addons.length > 0 ? order.addons.join(", ") : "None"}%0A• Estimated Budget: ₹${totalPrice()}+`;
     }
     if (order.message) msg += `%0A• Note: ${order.message}`;
     msg += `%0A%0APlease let me know availability and final pricing!`;
@@ -296,6 +303,14 @@ export default function BuildYourCake() {
                       }
                       selected={order.size}
                       onSelect={s => setOrder(o => ({ ...o, size: s }))}
+                    />
+                  )}
+
+                  {currentStep.id === "date" && (
+                    <StepDeliveryDate
+                      product={order.product!}
+                      selected={order.deliveryDate}
+                      onSelect={date => setOrder(o => ({ ...o, deliveryDate: date }))}
                     />
                   )}
 

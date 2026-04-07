@@ -54,6 +54,12 @@ export default function OrderSidebar({
                 value={order.size.label}
               />
             )}
+            {order.deliveryDate && (
+              <SummaryRow
+                label="Date"
+                value={new Date(order.deliveryDate + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+              />
+            )}
             {!isBrownie && order.flavor && (
               <SummaryRow
                 label="Flavor"
