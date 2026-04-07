@@ -176,25 +176,6 @@ export default function GallerySection() {
           </div>
         )}
 
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <p
-            className="text-sm mb-4"
-            style={{
-              color: "oklch(0.55 0.04 30)",
-              fontFamily: "var(--font-body)",
-            }}
-          >
-            Don't see what you're looking for? We create fully custom designs!
-          </p>
-          <a
-            href="/contact"
-            className="btn-gold px-8 py-3.5 rounded-full text-sm font-semibold shadow-lg inline-block"
-            style={{ fontFamily: "var(--font-body)", textDecoration: "none" }}
-          >
-            Request a Custom Cake ✨
-          </a>
-        </div>
       </div>
     </section>
   );
