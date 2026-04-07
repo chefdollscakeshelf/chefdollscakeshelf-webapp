@@ -13,6 +13,7 @@ interface MenuOrderState {
   cakeName: string;
   size: SizeOption | null;
   flavor: FlavorOption | null;
+  deliveryDate: string; // ISO "YYYY-MM-DD"
   instructions: string;
 }
 
@@ -31,6 +32,7 @@ export default function MenuOrder({
     cakeName: preselectedCake ?? "",
     size: null,
     flavor: null,
+    deliveryDate: "",
     instructions: "",
   });
 
@@ -51,7 +53,8 @@ export default function MenuOrder({
   const canProceed =
     order.cakeName.trim() !== "" &&
     order.size !== null &&
-    order.flavor !== null;
+    order.flavor !== null &&
+    order.deliveryDate !== "";
 
   const goTo = (target: "select" | "summary", dir: "forward" | "back") => {
     setDirection(dir);
@@ -67,9 +70,11 @@ export default function MenuOrder({
   const sendWhatsApp = () => {
     let msg = `Hi Dhvani! I'd like to order from ChefDollsCakeShelf.%0A%0A`;
     msg += `🎂 *Menu Order:*%0A`;
+    const dateStr = new Date(order.deliveryDate + "T00:00:00").toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
     msg += `• Cake: ${order.cakeName}%0A`;
     msg += `• Size: ${order.size?.label} (${order.size?.serves})%0A`;
     msg += `• Flavor: ${order.flavor?.emoji} ${order.flavor?.label}%0A`;
+    msg += `• Delivery Date: ${dateStr}%0A`;
     msg += `• Estimated Budget: ₹${totalPrice}+`;
     if (order.instructions.trim()) {
       msg += `%0A• Special Instructions: ${order.instructions}`;
@@ -279,6 +284,55 @@ export default function MenuOrder({
               </div>
             )}
 
+            {/* Delivery date picker */}
+            {order.cakeName && (
+              <div>
+                <label
+                  className="block text-xs font-semibold uppercase tracking-wide mb-2"
+                  style={{ color: "oklch(0.55 0.04 30)", fontFamily: "var(--font-body)" }}
+                >
+                  Delivery Date
+                </label>
+                {/* Cakes need 5 days notice */}
+                <div
+                  className="rounded-2xl px-4 py-3 mb-3 flex items-start gap-2"
+                  style={{ background: "oklch(0.97 0.03 70)", border: `1.5px solid ${ACCENT}` }}
+                >
+                  <span className="text-base mt-0.5">⏰</span>
+                  <p className="text-sm" style={{ color: "oklch(0.40 0.06 40)", fontFamily: "var(--font-body)" }}>
+                    <strong>Heads up:</strong> Custom cakes require at least 5–7 days notice.
+                  </p>
+                </div>
+                <input
+                  type="date"
+                  value={order.deliveryDate}
+                  min={new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split("T")[0]}
+                  onChange={e => setOrder(o => ({ ...o, deliveryDate: e.target.value }))}
+                  className="rounded-xl px-4 py-3 text-sm outline-none transition-all duration-200"
+                  style={{
+                    border: `1.5px solid ${order.deliveryDate ? ACCENT : "oklch(0.88 0.04 60)"}`,
+                    fontFamily: "var(--font-body)",
+                    color: "oklch(0.35 0.05 30)",
+                    background: "white",
+                    cursor: "pointer",
+                  }}
+                  onFocus={e => (e.target.style.borderColor = ACCENT)}
+                  onBlur={e => (e.target.style.borderColor = order.deliveryDate ? ACCENT : "oklch(0.88 0.04 60)")}
+                />
+                {order.deliveryDate && (
+                  <div
+                    className="mt-3 rounded-2xl px-4 py-3 inline-flex items-center gap-2"
+                    style={{ background: "oklch(0.96 0.04 140)", border: "1.5px solid oklch(0.75 0.1 140)" }}
+                  >
+                    <span>✅</span>
+                    <span className="text-sm font-semibold" style={{ color: "oklch(0.28 0.05 30)", fontFamily: "var(--font-body)" }}>
+                      {new Date(order.deliveryDate + "T00:00:00").toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Continue button */}
             <div
               className="flex justify-end pt-2 border-t"
@@ -340,6 +394,12 @@ export default function MenuOrder({
                     <PreviewRow
                       label="Flavor"
                       value={`${order.flavor.emoji} ${order.flavor.label}`}
+                    />
+                  )}
+                  {order.deliveryDate && (
+                    <PreviewRow
+                      label="Date"
+                      value={new Date(order.deliveryDate + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
                     />
                   )}
                   {order.size && (
@@ -416,6 +476,10 @@ export default function MenuOrder({
             <PreviewRow
               label="Flavor"
               value={`${order.flavor?.emoji} ${order.flavor?.label}`}
+            />
+            <PreviewRow
+              label="Delivery Date"
+              value={new Date(order.deliveryDate + "T00:00:00").toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
             />
           </div>
 
