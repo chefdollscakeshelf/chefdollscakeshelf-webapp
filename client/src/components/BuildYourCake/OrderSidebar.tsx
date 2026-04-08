@@ -37,7 +37,10 @@ export default function OrderSidebar({
       {!order.product ? (
         <p
           className="text-sm text-center"
-          style={{ color: "oklch(0.65 0.03 30)", fontFamily: "var(--font-body)" }}
+          style={{
+            color: "oklch(0.65 0.03 30)",
+            fontFamily: "var(--font-body)",
+          }}
         >
           Select a product to begin building your order.
         </p>
@@ -69,7 +72,9 @@ export default function OrderSidebar({
             {(isBrownie ? order.addons : order.decorations).length > 0 && (
               <SummaryRow
                 label={isBrownie ? "Add-ons" : "Decor"}
-                value={(isBrownie ? order.addons : order.decorations).join(", ")}
+                value={(isBrownie ? order.addons : order.decorations).join(
+                  ", "
+                )}
               />
             )}
           </div>
@@ -82,7 +87,10 @@ export default function OrderSidebar({
               >
                 <p
                   className="text-xs mb-1"
-                  style={{ color: "oklch(0.55 0.04 30)", fontFamily: "var(--font-body)" }}
+                  style={{
+                    color: "oklch(0.55 0.04 30)",
+                    fontFamily: "var(--font-body)",
+                  }}
                 >
                   Estimated Price
                 </p>

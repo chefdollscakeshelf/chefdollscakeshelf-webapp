@@ -47,7 +47,10 @@ export default function StepSummary({
         </h3>
         <p
           className="text-sm mt-1"
-          style={{ color: "oklch(0.55 0.04 30)", fontFamily: "var(--font-body)" }}
+          style={{
+            color: "oklch(0.55 0.04 30)",
+            fontFamily: "var(--font-body)",
+          }}
         >
           Review your order below and send it to Dhvani.
         </p>
@@ -60,16 +63,25 @@ export default function StepSummary({
           border: "1px solid oklch(0.90 0.04 60)",
         }}
       >
-        <SummaryRow label="Product" value={`${productMeta.emoji} ${productMeta.label}`} />
+        <SummaryRow
+          label="Product"
+          value={`${productMeta.emoji} ${productMeta.label}`}
+        />
         <SummaryRow
           label={isBrownie ? "Quantity" : "Size"}
           value={`${order.size?.emoji} ${order.size?.label} - ${order.size?.serves}`}
         />
         {!isBrownie && order.flavor && (
-          <SummaryRow label="Flavor" value={`${order.flavor.emoji} ${order.flavor.label}`} />
+          <SummaryRow
+            label="Flavor"
+            value={`${order.flavor.emoji} ${order.flavor.label}`}
+          />
         )}
         {!isBrownie && order.frosting && (
-          <SummaryRow label="Frosting" value={`${order.frosting.emoji} ${order.frosting.label}`} />
+          <SummaryRow
+            label="Frosting"
+            value={`${order.frosting.emoji} ${order.frosting.label}`}
+          />
         )}
         <SummaryRow
           label={isBrownie ? "Add-ons" : "Decorations"}
@@ -88,7 +100,10 @@ export default function StepSummary({
       >
         <p
           className="text-xs mb-1"
-          style={{ color: "oklch(0.55 0.04 30)", fontFamily: "var(--font-body)" }}
+          style={{
+            color: "oklch(0.55 0.04 30)",
+            fontFamily: "var(--font-body)",
+          }}
         >
           Estimated Starting Price
         </p>
@@ -100,7 +115,10 @@ export default function StepSummary({
         </p>
         <p
           className="text-xs mt-1"
-          style={{ color: "oklch(0.60 0.04 30)", fontFamily: "var(--font-body)" }}
+          style={{
+            color: "oklch(0.60 0.04 30)",
+            fontFamily: "var(--font-body)",
+          }}
         >
           Final price confirmed after consultation
         </p>

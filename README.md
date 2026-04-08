@@ -16,13 +16,13 @@
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | [React](https://react.dev/) with TypeScript (`.tsx`) |
-| Build Tool | [Vite](https://vitejs.dev/) |
-| Analytics | [Umami](https://umami.is/) (self-hosted or cloud) |
-| Fonts | Google Fonts (see below) |
-| Entry Point | `src/main.tsx` |
+| Layer       | Technology                                           |
+| ----------- | ---------------------------------------------------- |
+| Framework   | [React](https://react.dev/) with TypeScript (`.tsx`) |
+| Build Tool  | [Vite](https://vitejs.dev/)                          |
+| Analytics   | [Umami](https://umami.is/) (self-hosted or cloud)    |
+| Fonts       | Google Fonts (see below)                             |
+| Entry Point | `src/main.tsx`                                       |
 
 ### 🔤 Typography
 
@@ -131,7 +131,10 @@ The project integrates **[Umami](https://umami.is/)** - a privacy-friendly, open
 The viewport meta tag is configured for full mobile compatibility:
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1"
+/>
 ```
 
 ---
