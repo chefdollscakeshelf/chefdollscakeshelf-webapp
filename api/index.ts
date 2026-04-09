@@ -22,13 +22,14 @@ app.get("/api/drive/image/:fileId", async (req, res) => {
 
     const fileRes = await drive.files.get(
       { fileId, alt: "media" },
-      { responseType: "stream" }
+      { responseType: "arraybuffer" }
     );
 
     res.setHeader("Content-Type", mimeType);
     res.setHeader("Cache-Control", "public, max-age=3600");
-    (fileRes.data as NodeJS.ReadableStream).pipe(res);
-  } catch {
+    res.send(Buffer.from(fileRes.data as ArrayBuffer));
+  } catch (err) {
+    console.error("[Drive proxy] Failed to fetch image:", err);
     res.status(404).end();
   }
 });
