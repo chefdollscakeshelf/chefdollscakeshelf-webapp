@@ -8,9 +8,9 @@ import { ChevronDown } from "lucide-react";
 import { Link } from "wouter";
 
 const HERO_IMGS = [
-  "/home-page-product1.png",
-  "/home-page-product2.png",
-  "/home-page-product3.png",
+  "/home-page-product1.jpg",
+  "/home-page-product2.jpg",
+  "/home-page-product3.jpg",
 ];
 
 
